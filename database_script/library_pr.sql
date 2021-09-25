@@ -29,6 +29,7 @@ CREATE TABLE books(
    publi_date DATE,
    n_copies INT,
    available INT,
+   n-read INT default 0;
    description TEXT,
    cover BLOB,
    PRIMARY KEY (book_id)
@@ -101,7 +102,7 @@ if cb > 0  and new.r_status = 'returned' then
  set user.noof_current_books = user.noof_current_books -1, user.n_read = user.n_read+1
  where user.user_id = new.user_id;
  update books 
-   set books.available = books.available +1
+   set books.available = books.available +1,books.n_read = books.n_read + 1
    where books.book_id = new.book_id;
    end if;
 end $$
@@ -123,6 +124,17 @@ where order_id = ;
 insert into comments
 values(2,3,'It is a very good book to learn how to handle large data sets');
 */
+/*-- user searched by genre 
+select * from books 
+where genre = 'physics';
+*/
+
+/* --user specified name of book
+select * from books 
+where locate('LEARNING',name)>0;
+*/
+
+
 
 
 
