@@ -48,7 +48,7 @@ CREATE TABLE orders(
     book_id INT,
     user_id INT,
     taken DATETIME DEFAULT CURRENT_TIMESTAMP,
-    exp_return DATETIME DEFAULT (CURRENT_TIMESTAMP+10),
+    exp_return DATETIME DEFAULT (DATE_ADD(current_timestamp(), INTERVAL 10 DAY)),
     r_status varchar(8) DEFAULT 'using',
     PRIMARY KEY(order_id),
     FOREIGN KEY(book_id) REFERENCES books(book_id) ON DELETE SET NULL,
@@ -126,15 +126,13 @@ values(2,3,'It is a very good book to learn how to handle large data sets');
 */
 /*-- user searched by genre 
 select * from books 
-where genre = 'physics';
+where genre = ''; --use the genre inthe quotes
 */
 
 /* --user specified name of book
 select * from books 
-where locate('LEARNING',name)>0;
+where locate('',name)>0;  -- use word to search in the quotes 
 */
-
-
 
 
 
