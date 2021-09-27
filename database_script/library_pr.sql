@@ -20,7 +20,6 @@ create table emp(
    salary int,
    primary key (e_id)
 );
-
 CREATE TABLE books(
    book_id INT AUTO_INCREMENT,
    genre VARCHAR(20) NOT NULL DEFAULT 'other',
@@ -29,7 +28,7 @@ CREATE TABLE books(
    publi_date DATE,
    n_copies INT,
    available INT,
-   n-read INT default 0;
+   n_read INT default 0;
    description TEXT,
    cover BLOB,
    PRIMARY KEY (book_id)
@@ -42,7 +41,6 @@ CREATE TABLE comments(
    FOREIGN KEY(book_id) REFERENCES books(book_id) ON DELETE CASCADE,
    FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE
 );
-
 CREATE TABLE orders(
     order_id INT AUTO_INCREMENT,
     book_id INT,
@@ -65,13 +63,12 @@ INSERT INTO books (genre, name, authors, publi_date, n_copies, available, descri
 values ('Computer science', 'An Introduction to Statistical Learning: With Applications in R',"Gareth James, Trevor Hastie, Robert Tibshirani, Daniela Witten",
 '2017-01-26','6','6',"provides an accessible overview of the field of statistical learning, an essential toolset for making sense of the vast and complex data sets that have emerged in fields ranging from biology to finance to marketing to astrophysics in the past twenty years. This book presents some of the most important modeling and prediction techniques, along with relevant applications. Topics include linear regression, classification, resampling methods, shrinkage approaches, tree-based methods, support vector machines, clustering, and more. Color graphics and real-world examples are used to illustrate the methods presented"
 ,LOAD_FILE(''));
-
 INSERT INTO books (genre, name, authors, publi_date, n_copies, available, description, cover)
 values ('physics','The Feynman Lectures on Physics Vol 1', 'Richard P. Feynman, Robert B. Leighton, Matthew L. Sands', "2005-09-01",4,4,
 'published in 1963, the three-volume Feynman lectures on physics set remains a classic text Originally. This edition, which was prepared by Kip S. Thorne (Feynman Professor of Theoretical Physics at California Institute of Technology), fully incorporates all the errata and corrections gathered (but never used in a published edition) by Feynman.',
 load_file(''));
 */
-/* trigger to update user books and available books when ordered
+/* --- trigger to update user books and available books when ordered
 delimiter $$
 create trigger book_order
 after insert on orders for each row
@@ -90,14 +87,12 @@ end $$
 delimiter ;
 */
 /*
-to update available books and user books when user returned 
+-- to update available books and user books when user returned 
 delimiter $$
 create trigger book_return
 after update on orders for each row 
 begin 
-declare cb int;
-select noof_current_books into cb from user where user_id = new.user_id;
-if cb > 0  and new.r_status = 'returned' then 
+if old.r_status = 'using' and new.r_status = 'returned' then 
  update user
  set user.noof_current_books = user.noof_current_books -1, user.n_read = user.n_read+1
  where user.user_id = new.user_id;
@@ -107,7 +102,6 @@ if cb > 0  and new.r_status = 'returned' then
    end if;
 end $$
 delimiter ;
-
 */
 /*
 --  user ordering a book 
@@ -133,12 +127,4 @@ where genre = ''; --use the genre inthe quotes
 select * from books 
 where locate('',name)>0;  -- use word to search in the quotes 
 */
-
-
-
-
-
-
-
-
 
