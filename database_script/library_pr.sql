@@ -8,7 +8,7 @@ use library_pr;
     gender CHAR(1),
     noof_current_books INT default 0,
     n_read int default 0,
-    pic BLOB,
+    pic tinytext,
     PRIMARY KEY (user_id)
 );
 create table emp(
@@ -30,7 +30,7 @@ CREATE TABLE books(
    available INT,
    n_read INT default 0;
    description TEXT,
-   cover BLOB,
+   cover tinytext,
    PRIMARY KEY (book_id)
 );
 CREATE TABLE comments(
@@ -127,4 +127,5 @@ where genre = ''; --use the genre inthe quotes
 select * from books 
 where locate('',name)>0;  -- use word to search in the quotes 
 */
+
 
