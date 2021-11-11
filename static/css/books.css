@@ -8,6 +8,7 @@
     border-radius: 5px; 
     margin: 2%;
     text-align: center;
+    transition: all .1s ease-in-out;
    }
    .image img{
     width: 100%;
@@ -17,5 +18,5 @@
     border-top-left-radius: 5px;
    }
    .card:hover {
-    transform: scale(1.15); 
+       transform: scale(1.05); 
   } 
