@@ -34,12 +34,13 @@ CREATE TABLE books(
    PRIMARY KEY (book_id)
 );
 CREATE TABLE comments(
+   comment_id INT AUTO_INCREMENT,
    book_id INT,
    user_id INT,
    comment TEXT,
-   PRIMARY KEY(book_id, user_id),
    FOREIGN KEY(book_id) REFERENCES books(book_id) ON DELETE CASCADE,
-   FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE
+   FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+   PRIMARY KEY (comment_id)
 );
 CREATE TABLE orders(
     order_id INT AUTO_INCREMENT,
@@ -127,5 +128,6 @@ where genre = ''; --use the genre inthe quotes
 select * from books 
 where locate('',name)>0;  -- use word to search in the quotes 
 */
+
 
 

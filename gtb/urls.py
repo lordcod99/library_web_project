@@ -18,6 +18,10 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from books.views import home_veiw, books_veiw,book_veiw
 urlpatterns = [
+    path('',home_veiw, name='books'),
+    path('books/',books_veiw, name='books'),
+    path('book/<int:book_id>/',book_veiw, name='book'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
