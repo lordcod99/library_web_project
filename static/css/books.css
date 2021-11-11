@@ -8,7 +8,7 @@
     border-radius: 5px; 
     margin: 2%;
     text-align: center;
-    transition: all .1s ease-in-out;
+    transition: all .3s ease-in-out;
    }
    .image img{
     width: 100%;
