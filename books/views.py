@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import book
+from comments.models import comment
 # Create your views here.
 def home_veiw(request, *args, **kwrgs):
     return render(request, 'home.html')
@@ -13,6 +14,10 @@ def books_veiw(request, *args, **kwrgs):
 
 def book_veiw(request, book_id,*args, **kwrgs):
     books=get_object_or_404(book, pk=book_id)
-    context={'books': books}
+    comments =comment.objects.filter(book = book_id)
+    count = len(comments)
+    context={'books': books, "comments":comments, "count":count}
     return render(request, 'books/book.html', context)
+
+
 

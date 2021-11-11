@@ -29,6 +29,21 @@
 <div class="description">
     <h2>Description</h2>
     <p>{{books.description}}</p>
+</div>
+<div class="comments">
+        <h2 style="text-align: center;">Reviews</h2>
+        {% if count == 0 %}
+        <h3 style="text-align: center;">No Reviews Yet</h3>
+    {% else %}
+    <div class="row">
+        {% for cmt in comments %}
+        <div class="card">
+            <b>{{cmt.user.name}}:</b>
+            <p>{{cmt.comment}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
 </div>
 

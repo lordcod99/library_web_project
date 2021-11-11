@@ -129,5 +129,3 @@ select * from books
 where locate('',name)>0;  -- use word to search in the quotes 
 */
 
-
-

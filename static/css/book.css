@@ -43,3 +43,18 @@
       padding-left: 10px;
       padding-right: 10px;
   }
+  .row{
+    margin: 0px;
+    padding: 0px;
+  }
+  .card {
+    background-color: #ddd;
+    box-shadow: 10px 10px grey;
+    border-radius: 20px; 
+    padding: 20px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+
+ }
