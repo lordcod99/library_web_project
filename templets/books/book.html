@@ -13,6 +13,9 @@
        <h3><b>Author:</b>{{books.authors}}</h3>
        <h3><b>Published on:</b>{{books.publi_date}}</h3>
        <h3>genre:{{books.genre}}</h3>
+       {% if books.n_read != 0 %}
+       <h4><b>Read by:</b> {{ books.n_read }} users</h4>
+       {% endif %}
        {% if books.availabel != 0 %}
        <h3 style="color: limegreen;">{{books.available}} available</h3>
        <h5>Rent now to get 10 days rent duration</h5>
