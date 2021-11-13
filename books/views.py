@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import book
 from comments.models import comment
+from orders.models import order
+from profiles.models import user_profile
 # Create your views here.
 def home_veiw(request, *args, **kwrgs):
     return render(request, 'home.html')

@@ -26,7 +26,7 @@
       <div class="container d-flex justify-content-between">
           {% if user.is_authenticated %}
           <div><a class="text-light" href="{% url 'account_email' %}">Change E-mail</a></div>
-          <div><a class="text-light" href="{% url 'home' %}">Home</a></div>
+          <div><a class="text-light" href="/accounts/logout/">Home</a></div>
           <div><a class="text-light" href="{% url 'account_logout' %}">Sign Out</a></div>
           {% else %}
           <div><a class="text-light" href="{% url 'account_login' %}">Sign In</a></div>

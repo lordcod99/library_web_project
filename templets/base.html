@@ -3,18 +3,173 @@
 <head>
   <title>Get your Book</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        {% block extra_head %}
+        {% endblock %} 
+
+        <style>
+          .home_top {
+              background-color: rgb(63, 65, 63);
+              width: 99%;
+              top: 0px;
+              position: fixed;
+              height: 50px;
+              border-radius: 10px;
+          }
+
+          /* .home_top {
+            background-color: rgb(156, 207, 14);
+            padding: 1%;
+            padding-top: 0.1%;
+            padding-bottom: 0.1%;
+            top: 0px;
+            width: 97%;
+            position: fixed;
+            height: 100px;
+        } */
+
+          .home_body {
+              width: 97%;
+              margin: 1%;
+              background-color: rgb(182, 177, 182);
+          }
+
+          .empty {
+              width: 98%;
+              height: 50px;
+              top: 0px;
+              margin-top: 0px;
+              /* background-color: rgb(187, 36, 36); */
+          }
+
+          #main_name {
+            font-size: 125%;
+            /* background-color: cornsilk; */
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            width: auto;
+            color: rgb(209, 204, 204);
+            float: left;
+            padding-left: 1%;
+            padding-right: 1%;
+          }
+          #main_name:hover {
+            color: rgb(247, 242, 242);
+          }
+
+          #main_bks {
+            font-size: 125%;
+            /* background-color: cornsilk; */
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            width: auto;
+            color: rgb(209, 204, 204);
+            float: right;
+            margin-right: 2%;
+            padding-left: 1%;
+            padding-right: 1%;
+          }
+          #main_bks:hover {
+            color: rgb(247, 242, 242);
+          }
+
+          #main_prof {
+            font-size: 125%;
+            /* background-color: cornsilk; */
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            width: auto;
+            color: rgb(209, 204, 204);
+            float: right;
+            margin-right: 2%;
+            padding-left: 1%;
+            padding-right: 1%;
+          }
+          #main_prof:hover {
+            color: rgb(247, 242, 242);
+          }
+
+          #main_in {
+            font-size: 125%;
+            /* background-color: cornsilk; */
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            width: auto;
+            color: rgb(209, 204, 204);
+            float: right;
+            margin-right: 2%;
+            padding-left: 1%;
+            padding-right: 1%;
+          }
+          #main_in:hover {
+            color: rgb(247, 242, 242);
+          }
+
+          #main_reg {
+            font-size: 125%;
+            /* background-color: cornsilk; */
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            width: auto;
+            color: rgb(209, 204, 204);
+            float: right;
+            margin-right: 2%;
+            padding-left: 1%;
+            padding-right: 1%;
+          }
+          #main_reg:hover {
+            color: rgb(247, 242, 242);
+          }
+
+          #main_out {
+            font-size: 125%;
+            /* background-color: cornsilk; */
+            margin-top: 0.5%;
+            margin-bottom: 0.5%;
+            width: auto;
+            color: rgb(209, 204, 204);
+            float: right;
+            margin-right: 2%;
+            padding-left: 1%;
+            padding-right: 1%;
+          }
+          #main_out:hover {
+            color: rgb(247, 242, 242);
+          }
+
+        </style>
+
   {% block css %}
 
   {% endblock %}
 
 </head>
 <body>
+  <div class="home_top" id="header">
+    <a href="/"><p id="main_name">Get Your Book</p></a>
 
-<nav class="navbar navbar-inverse">
+    {% if request.user.is_authenticated %}
+      <a href="/accounts/logout/"><p id="main_out">Sign Out</p></a>
+    {% else %}
+      <a href="/accounts/signup/"><p id="main_reg">Register</p></a>
+      <a href="/accounts/login/"><p id="main_in">Sign In</p></a>
+    {% endif %}
+    
+    
+    {% if request.user.is_authenticated %}
+      <a href="/"><p id="main_prof">Profile</p></a>
+    {% else %}
+      <a href="/accounts/login/"><p id="main_prof">Profile</p></a>
+    {% endif %}
+
+    <a href="/books/"><p id="main_bks">Books</p></a>
+  </div>
+
+  <div class="empty">
+  </div>
+
+<!-- <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">Get your Book</a>
@@ -35,7 +190,7 @@
       </div>
     </form>
   </div>
-</nav>
+</nav> -->
 {% block content %}
 {% endblock %}
 </body>

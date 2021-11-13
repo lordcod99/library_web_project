@@ -5,7 +5,7 @@ class user_profile(models.Model):
     user_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     email = models.CharField(unique=True, max_length=50)
-    pswd = models.CharField(max_length=50)
+    pswd = models.CharField(max_length=128)
     gender = models.CharField(max_length=1, blank=True, null=True)
     noof_current_books = models.IntegerField(blank=True, null=True)
     n_read = models.IntegerField(blank=True, null=True)

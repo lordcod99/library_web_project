@@ -4,7 +4,7 @@ use library_pr;
     user_id INT AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
     email VARCHAR(50) NOT NULL unique,
-    pswd VARCHAR(50) NOT NULL,
+    pswd VARCHAR(128) NOT NULL,
     gender CHAR(1),
     noof_current_books INT default 0,
     n_read int default 0,
@@ -105,6 +105,17 @@ end $$
 delimiter ;
 */
 /*
+trigger to add reistered users to user(profile) table
+delimiter $$
+create trigger adduser
+after insert on auth_user for each row
+begin 
+  INSERT INTO user (name, email, pswd)
+  VALUES (new.username, new.email, new.password);
+end $$
+delimiter ;
+*/
+/*
 --  user ordering a book 
 insert into orders(book_id,user_id)
 values (,);
@@ -128,4 +139,5 @@ where genre = ''; --use the genre inthe quotes
 select * from books 
 where locate('',name)>0;  -- use word to search in the quotes 
 */
+
 
