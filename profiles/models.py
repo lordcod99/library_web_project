@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class user(models.Model):
+class user_profile(models.Model):
     user_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     email = models.CharField(unique=True, max_length=50)

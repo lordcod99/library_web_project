@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-p=8bj!l6!s9xyvz8+m$o^@y^^rwwxp+_tr@-)d+x*^4=l47(7y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'library_pr',
         'USER': 'root',
-        'PASSWORD': '12345',
+        'PASSWORD': 'sai99%$',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -98,15 +98,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    #{
+        #'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+   # },
+   # {
+        #'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+   # },
+   # {
+        #'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+   # },
 ]
 
 
