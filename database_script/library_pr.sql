@@ -48,7 +48,7 @@ CREATE TABLE orders(
     user_id INT,
     taken DATETIME DEFAULT CURRENT_TIMESTAMP,
     exp_return DATETIME DEFAULT (DATE_ADD(current_timestamp(), INTERVAL 10 DAY)),
-    r_status varchar(8) DEFAULT 'using',
+    r_status varchar(20) DEFAULT 'placed',
     PRIMARY KEY(order_id),
     FOREIGN KEY(book_id) REFERENCES books(book_id) ON DELETE SET NULL,
     FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE SET NULL
@@ -139,5 +139,15 @@ where genre = ''; --use the genre inthe quotes
 select * from books 
 where locate('',name)>0;  -- use word to search in the quotes 
 */
+show tables;
+describe user;
 
+SELECT 
+  TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+FROM
+  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+  REFERENCED_TABLE_SCHEMA = 'library_pr' AND
+  REFERENCED_TABLE_NAME = 'user' AND
+  REFERENCED_COLUMN_NAME = 'name';
 
