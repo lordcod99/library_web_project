@@ -1,199 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Get your Book</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <head>
+      title>Get your Book</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        
         {% block extra_head %}
         {% endblock %} 
+        {% block css%}
+        {% endblock %} 
 
-        <style>
-          .home_top {
-              background-color: rgb(63, 65, 63);
-              width: 99%;
-              top: 0px;
-              position: fixed;
-              height: 50px;
-              border-radius: 10px;
-          }
 
-          /* .home_top {
-            background-color: rgb(156, 207, 14);
-            padding: 1%;
-            padding-top: 0.1%;
-            padding-bottom: 0.1%;
-            top: 0px;
-            width: 97%;
-            position: fixed;
-            height: 100px;
-        } */
+    </head>
+    <body>
+        
+        <div class="home_top" id="header">
+          <a href="/"><p id="main_name">Get Your Book</p></a>
 
-          .home_body {
-              width: 97%;
-              margin: 1%;
-              background-color: rgb(182, 177, 182);
-          }
 
-          .empty {
-              width: 98%;
-              height: 50px;
-              top: 0px;
-              margin-top: 0px;
-              /* background-color: rgb(187, 36, 36); */
-          }
+          {% if request.user.is_authenticated %}
+            <a href="/accounts/logout/"><p id="main_out">Sign Out</p></a>
+          {% else %}
+            <a href="/accounts/signup/"><p id="main_reg">Register</p></a>
+            <a href="/accounts/login/"><p id="main_in">Sign In</p></a>
+          {% endif %}
 
-          #main_name {
-            font-size: 125%;
-            /* background-color: cornsilk; */
-            margin-top: 0.5%;
-            margin-bottom: 0.5%;
-            width: auto;
-            color: rgb(209, 204, 204);
-            float: left;
-            padding-left: 1%;
-            padding-right: 1%;
-          }
-          #main_name:hover {
-            color: rgb(247, 242, 242);
-          }
+          {% if request.user.is_staff %}
+            <a href="/admin/"><p id="admin">Admin</p></a>
+          {% endif %}
+          
+          
+          {% if request.user.is_authenticated %}
+            <a href="/profile/"><p id="main_prof">Profile</p></a>
+          {% else %}
+            <a href="/accounts/login/"><p id="main_prof">Profile</p></a>
+          {% endif %}
 
-          #main_bks {
-            font-size: 125%;
-            /* background-color: cornsilk; */
-            margin-top: 0.5%;
-            margin-bottom: 0.5%;
-            width: auto;
-            color: rgb(209, 204, 204);
-            float: right;
-            margin-right: 2%;
-            padding-left: 1%;
-            padding-right: 1%;
-          }
-          #main_bks:hover {
-            color: rgb(247, 242, 242);
-          }
+          <a href="/"><p id="auths">Authors</p></a>
 
-          #main_prof {
-            font-size: 125%;
-            /* background-color: cornsilk; */
-            margin-top: 0.5%;
-            margin-bottom: 0.5%;
-            width: auto;
-            color: rgb(209, 204, 204);
-            float: right;
-            margin-right: 2%;
-            padding-left: 1%;
-            padding-right: 1%;
-          }
-          #main_prof:hover {
-            color: rgb(247, 242, 242);
-          }
-
-          #main_in {
-            font-size: 125%;
-            /* background-color: cornsilk; */
-            margin-top: 0.5%;
-            margin-bottom: 0.5%;
-            width: auto;
-            color: rgb(209, 204, 204);
-            float: right;
-            margin-right: 2%;
-            padding-left: 1%;
-            padding-right: 1%;
-          }
-          #main_in:hover {
-            color: rgb(247, 242, 242);
-          }
-
-          #main_reg {
-            font-size: 125%;
-            /* background-color: cornsilk; */
-            margin-top: 0.5%;
-            margin-bottom: 0.5%;
-            width: auto;
-            color: rgb(209, 204, 204);
-            float: right;
-            margin-right: 2%;
-            padding-left: 1%;
-            padding-right: 1%;
-          }
-          #main_reg:hover {
-            color: rgb(247, 242, 242);
-          }
-
-          #main_out {
-            font-size: 125%;
-            /* background-color: cornsilk; */
-            margin-top: 0.5%;
-            margin-bottom: 0.5%;
-            width: auto;
-            color: rgb(209, 204, 204);
-            float: right;
-            margin-right: 2%;
-            padding-left: 1%;
-            padding-right: 1%;
-          }
-          #main_out:hover {
-            color: rgb(247, 242, 242);
-          }
-
-        </style>
-
-  {% block css %}
-
-  {% endblock %}
-
-</head>
-<body>
-  <div class="home_top" id="header">
-    <a href="/"><p id="main_name">Get Your Book</p></a>
-
-    {% if request.user.is_authenticated %}
-      <a href="/accounts/logout/"><p id="main_out">Sign Out</p></a>
-    {% else %}
-      <a href="/accounts/signup/"><p id="main_reg">Register</p></a>
-      <a href="/accounts/login/"><p id="main_in">Sign In</p></a>
-    {% endif %}
-    
-    
-    {% if request.user.is_authenticated %}
-      <a href="/"><p id="main_prof">Profile</p></a>
-    {% else %}
-      <a href="/accounts/login/"><p id="main_prof">Profile</p></a>
-    {% endif %}
-
-    <a href="/books/"><p id="main_bks">Books</p></a>
-  </div>
-
-  <div class="empty">
-  </div>
-
-<!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">Get your Book</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/books/">Books</a></li>
-      <li><a href="#">profile</a></li>
-      <li><a href="#">sign in/register</a></li>
-    </ul>
-    <form class="navbar-form navbar-left" action="/action_page.php">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
+          <a href="/book_main/"><p id="main_bks">Books</p></a>
         </div>
-      </div>
-    </form>
-  </div>
-</nav> -->
-{% block content %}
-{% endblock %}
-</body>
+
+        <div class="empty">
+        </div>
+
+        <!-- <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/">Get your Book</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/books/">Books</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Sign in/Register</a></li>
+              </ul>
+              <form class="navbar-form navbar-left" action=".">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" name="search">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </nav> -->
+
+        <div class="home_body">
+          <!-- <p>{{ request.user }} {{ request.user.is_authenticated }}</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis quae explicabo ipsum suscipit culpa dignissimos repudiandae qui totam, nobis, iusto, libero neque doloribus consectetur non sed facere velit natus id animi accusantium in pariatur quod odit eveniet. Doloribus, veritatis non. Consequatur repellat, commodi nisi maxime cum nemo quidem magni, eveniet aut facere dolorem omnis voluptates laboriosam. Reprehenderit consequatur repellat consequuntur veritatis molestiae dolorem ab aspernatur cumque dignissimos, praesentium omnis nulla nesciunt rem obcaecati debitis perferendis explicabo deleniti delectus provident laudantium iusto sed fugit dolores totam. Fugiat expedita nisi soluta nobis quis nemo! Harum aut nisi iure. Itaque earum quam neque?</p> -->
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </body>
 </html>
+
 

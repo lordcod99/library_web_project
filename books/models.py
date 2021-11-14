@@ -11,7 +11,7 @@ class book(models.Model):
     available = models.IntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     n_read = models.IntegerField(blank=True, null=True, default=0)
-    cover = models.ImageField(blank=True, null=True, upload_to='cover/')
+    cover = models.ImageField(blank=True, null=True, upload_to='cover/', default = "cover/noImg.jpg")
 
     class Meta:
         managed = False

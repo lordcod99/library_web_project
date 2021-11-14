@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block extra_head %}
+<style>
+
+    th{
+        padding: 20px;
+        text-align: left;
+        border-bottom: 2px solid black;
+        /* background-color: rgb(78, 161, 30); */
+    }
+
+    td {
+        padding: 20px;
+        text-align: left;
+        border-bottom: 2px solid black;
+    }
+
+    /* .table_data:hover {
+        background-color: yellow;
+    } */
+
+    /* tr:nth-child(even) {
+        background-color: #f2f2f2;
+    } */
+
+    table {
+        /* background-color: rgb(43, 246, 141); */
+        width: 95%;
+        padding-left:2%;
+        padding-right: 2%;
+        float: left;
+    }
+
+    .book_name {
+        width: 65%;
+    }
+
+    .using {
+        /* background-color: burlywood; */
+        width: 90%;
+        float: left;
+        /* padding: 50px; */
+    }
+
+    .return {
+        /* background-color: crimson; */
+        width: 90%;
+        margin-top: 3%;
+        float: left;
+    }
+
+    .no_bk {
+        width: 64%;
+        /* background-color: crimson; */
+        float: left;
+        text-align: center;
+        margin-left: 3%;
+    }
+
+    #pi_chart {
+        width: 300px;
+        height: 300px;
+        background-color: rgb(110, 34, 34);
+        border-radius: 50%;
+        float: right;
+        margin-top: 2%;
+        margin-right: 4%;
+
+        background-image: conic-gradient(
+                        pink 70deg, 
+                        lightblue 0 235deg, 
+                        orange 0);
+    }
+
+    .lists {
+        /* background-color: rgb(202, 200, 204); */
+        /* padding: 20px; */
+        width: 65%;
+        float: left;
+        margin-left: 1%;
+        margin-bottom: 10%;
+    }
+
+    .using_bks {
+        background-color: #dde0e0;
+        padding-bottom: 2%;
+        border-radius: 20px;
+    }
+
+    .returned_bks {
+        background-color: rgb(223, 221, 218);
+        padding-bottom: 2%;
+        border-radius: 20px;
+    }
+
+    .side_bar {
+        /* background-color: rgb(220, 218, 223); */
+        border-radius: 20px;
+        width: 30%;
+        float: right;
+        margin-left: 66%;
+        margin-top: 2%;
+        position: fixed;
+    }
+
+    .prof_img {
+        margin-top: 5%;
+        margin-left: 20%;
+        border-radius: 20%;
+    }
+
+    .prof_name {
+        background-color: rgb(102, 100, 98);
+        width: 50%;
+        text-align: center;
+        margin-top: 1%;
+        margin-bottom: 0px;
+        margin-left: 25%;
+        border-radius: 20px;
+        padding: 1%;
+    }
+
+    .prof_email {
+        background-color: burlywood;
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 1%;
+        text-align: center;
+        padding: 1%;
+        border-radius: 20px;
+    }
+
+</style>
+{% endblock %} 
+
+
+{% block content %}
+            
+    <div class="lists">
+        <div class="using">
+            <h2>Currently using books</h2>
+        </div>
+        <div>
+            <table class="using_bks">
+                <tr>
+                    <th class="book_name">Name of the book</th>
+                    <th id="place_date">Placed on</th>
+                </tr>
+
+                {% for b in qs2 %}
+                    <tr class="table_data">
+                        <td>
+                            <a href="/book/{{ b.book.book_id }}/">
+                                {{ b.book.name }}
+                            </a>
+                        </td>
+                        <td>{{ b.taken }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        {% if no_use %}
+            <p class="no_bk"><i>No books here :(</i></p>
+        {% endif %}
+
+
+        <div class="return">
+            <h2>Returned books</h2>
+        </div>
+        <div>
+            <table class="returned_bks">
+                <tr>
+                    <th class="book_name">Name of the book</th>
+                    <th id="return_date">Returned on</th>
+                </tr>
+
+                {% for b in qs3 %}
+                    <tr class="table_data">
+                        <td>
+                            <a href="/book/{{ b.book.book_id }}/">
+                                {{ b.book.name }}
+                            </a>
+                        </td>
+                        <td>{{ b.taken }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+        {% if no_ret %}
+            <p class="no_bk"><i>No books here :(</i></p>
+        {% endif %}
+
+    </div>
+
+    <div class="side_bar">
+
+        <div class="prof_info">
+            <img src="{{ u.pic.url }}" alt="Profile pic" width="60%" class="prof_img">
+            <p class="prof_name">{{ u.name }}</p>
+            {% if u.email %}
+                <p class="prof_email">{{ u.email }}</p>
+            {% endif %}
+        </div>
+
+        <!-- <div id="pi_chart">
+        </div> -->
+
+    </div>
+
+{% endblock %}

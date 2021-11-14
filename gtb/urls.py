@@ -18,11 +18,16 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from books.views import home_veiw, books_veiw,book_veiw
+from books.views import home_veiw, books_veiw,book_veiw, book_main_view
+from profiles.views import order_view
+
 urlpatterns = [
-    path('',home_veiw, name='books'),
+    path('',home_veiw, name='welcomepage'),
     path('accounts/', include('allauth.urls')),
+    path("profile/", order_view),
+    path("book_main/", book_main_view, name="dashboard"),
     path('books/',books_veiw, name='books'),
+    path('books_table/',books_veiw, name='books_table'),
     path('book/<int:book_id>/',book_veiw, name='book'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

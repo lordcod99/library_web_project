@@ -4,17 +4,108 @@
 <link rel="stylesheet" href="{% static 'css/books.css' %}">
 {% endblock %}
 {% block content %}
-<div class="container-fluid">
-    {% for book in books %}
-    <div class = "card">
-        <a href="/book/{{ book.book_id }}">
-        <div class = "image">
-        <img src="{{book.cover.url}}"> 
+<div class="list">
+
+    {% if request.path == "/books/" %}
+        <div class="container-fluid">
+            {% for book in ls %}
+                <div class = "card">
+                    <a href="/book/{{ book.book_id }}">
+                        <div class = "image">
+                            <img src="{{book.cover.url}}"> 
+                        </div>
+                        <h4 id="card_name">{{ book.name }}</h4>
+                    </a>
+                </div>
+            {% endfor %}
+            <!-- <h1>{{ request.get_full_path }}</h1> -->
+            <!-- <h1>{{ request.path }}</h1> -->
         </div>
-        <h4>{{ book.name }}</h4>
-        </a>
+
+        {% if no_b %}
+            <p class="no_bk"><i>No book matched</i></p>
+        {% endif %}
+
+    {% else %}
+        <table>
+            <tr class="heads">
+                <th id="book_name">Book Name</th>
+                <th id="authors">Authors</th>
+                <th id="genre">Genre</th>
+                <th id="publi_date">Published on</th>
+                <th id="avail">Available copies</th>
+            </tr>
+
+            {% for b in ls %}
+                <tr class="table_data">
+                    <td>
+                        <a href="/book/{{ b.book_id }}/" style="color: black;">
+                            {{ b.name }}
+                        </a>
+                    </td>
+                    <td>{{ b.authors }}</td>
+                    <td>{{ b.genre }}</td>
+                    <td>{{ b.publi_date }}</td>
+                    <td>{{ b.available }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if no_b %}
+        <p class="no_bk"><i>No book matched</i></p>
+    {% endif %}
+
+</div>
+
+<div class="side_bar">
+
+    <div class="switch">
+        {% if request.path == "/books/" %}
+            <a href="/books_table/">
+                <p class="switch_b">Detailed view</p>
+            </a>
+        {% else %}
+            <a href="/books/">
+                <p class="switch_b">Collection View</p>
+            </a>
+        {% endif %}
     </div>
-    {% endfor %}
+
+    <div class="search_bar">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Search" name="search">
+            <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <a href="{{request.path}}" id="clear_search">Clear search</a>
+
+    <i class="or_bet">---- or ----</i>
+
+    <div class="drop_downs">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <label for="select_genre"> Choose a genre :</label>
+            <select name="select_genre" id="genre_selc">
+                <option value="">-- select --</option>
+                {% for g in genre_list %}
+                    <option value="{{ g }}" name = "testing" >{{ g }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="select_author"> Choose a author :</label>
+            <select name="select_author" id="auth_selc">
+                <option value="">-- select --</option>
+                {% for a in author_list %}
+                    <option value="{{ a }}">{{ a }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="filter_but"> Filter books</button>
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}

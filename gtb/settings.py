@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'library_pr',
         'USER': 'root',
-        'PASSWORD': '12345',
+        'PASSWORD': 'sai99%$',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -172,3 +172,7 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 ACCOUNT_LOGOUT_REDIRECT_URL ="/accounts/login"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+ACCOUNT_UNIQUE_EMAIL = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"

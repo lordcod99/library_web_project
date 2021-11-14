@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <style>
+        .block_v {
+            background-color: rgb(233, 230, 230);
+            width: 70%;
+            /* height: 300px; */
+            text-align: center;
+            padding-top: 15%;
+            padding-bottom: 15%;
+            border-radius: 10px;
+            box-shadow: 3px 3px 20px black;
+            transition: all .3s ease-in-out;
+            margin-top: 10%;
+            margin-bottom: 15%;
+            margin-left: 15%;
+            color: black;
+            /* float: left; */
+            
+        }
+        .block_v:hover {
+            box-shadow: 10px 10px 20px black; 
+            background-color: rgb(223, 220, 220);
+        }
+
+        .list_v {
+            background-color: rgb(233, 230, 230);
+            width: 70%;
+            /* padding: 5%; */
+            /* height: 300px; */
+            text-align: center;
+            padding-top: 15%;
+            padding-bottom: 15%;
+            border-radius: 10px;
+            box-shadow: 3px 3px 20px black;
+            transition: all .3s ease-in-out;
+            margin-top: 5%;
+            margin-left: 15%;
+            margin-bottom: 10%;
+            color: black;
+            /* float: right; */
+        }
+        .list_v:hover {
+            box-shadow: 10px 10px 20px black; 
+            background-color: rgb(223, 220, 220);
+        }
+
+        .side_b {
+            /* background-color: blue; */
+            width: 20%;
+            float: right;
+            margin-right: 1%;
+            text-align: center;
+            margin-top: 7%;
+        }
+
+        .top_ten {
+            float: left;
+            width: 73%;
+            margin-top: 2%;
+            margin-left: 3%;
+            /* background-color: brown; */
+        }
+
+        .container-fluid{
+            /* display: flex; */
+            /* background-color: blue; */
+            margin-bottom: 80%;
+        }
+
+        .card{
+            width: 20%;
+            /* display: inline-block; */
+            box-shadow: 1px 1px 20px black;
+            float: left;
+            border-radius: 5px; 
+            width: 25%;
+            height: 350px;
+            margin: 2%;
+            text-align: center;
+            transition: all .3s ease-in-out;
+            background-color: rgb(224, 219, 219);
+        }
+
+        #card_name {
+            margin-top: 0px;
+            margin-bottom: 5px;
+            margin-left: 0px;
+            margin-right: 0px;
+            /* background-color: blue;    */
+            vertical-align: center;  
+            color: black;       
+        }
+
+        .image img{
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+
+        .card:hover {
+            box-shadow: 10px 10px 20px black; 
+        } 
+
+        .home_body {
+            width: 97%;
+            margin: 1%;
+        }
+
+    </style>
+{% endblock %} 
+
+{% block content %}
+
+    <div class="top_ten">
+        <h1 style="text-align: center;">Popular books</h1>
+
+        <div class="container-fluid">
+            {% for book in ls %}
+                <div class = "card">
+                    <a href="/book/{{ book.book_id }}">
+                        <div class = "image">
+                            <img src="{{book.cover.url}}"> 
+                        </div>
+                        <h4 id="card_name">{{ book.name }}</h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="side_b">
+        <a href="/books/">
+            <div class="block_v">
+                <h2>Find BOOKS</h2>
+            </div>
+        </a>
+
+        <a href="/books_tbale/">
+            <div class="list_v">
+                <h2>List View</h2>
+            </div>
+        </a>
+    </div>
+
+{% endblock %}

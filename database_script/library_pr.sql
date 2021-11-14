@@ -139,15 +139,4 @@ where genre = ''; --use the genre inthe quotes
 select * from books 
 where locate('',name)>0;  -- use word to search in the quotes 
 */
-show tables;
-describe user;
-
-SELECT 
-  TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
-FROM
-  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-WHERE
-  REFERENCED_TABLE_SCHEMA = 'library_pr' AND
-  REFERENCED_TABLE_NAME = 'user' AND
-  REFERENCED_COLUMN_NAME = 'name';
 

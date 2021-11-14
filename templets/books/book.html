@@ -8,32 +8,69 @@
     <div class= "image">
         <img src="{{books.cover.url}}">
     </div>
-    <div class= "detailes">
-       <h1>{{ books.name }}</h1>
-       <h3><b>Author:</b>{{books.authors}}</h3>
-       <h3><b>Published on:</b>{{books.publi_date}}</h3>
-       <h3>genre:{{books.genre}}</h3>
-       {% if books.n_read != 0 %}
-       <h4><b>Read by:</b> {{ books.n_read }} users</h4>
-       {% endif %}
-       {% if books.availabel != 0 %}
-       <h3 style="color: limegreen;">{{books.available}} available</h3>
-       <h5>Rent now to get 10 days rent duration</h5>
-       <a href="#"> <!--add oeder form reference path-->
-        <button class="button">RENT</button>
-       </a>
-       {% else %}
-       <h3 style="color: orange;">currently unavalable</h3>
-       <h5>will be available soon</h5>
-       {% endif %}
+    <div class= "book_info">
+        <h1 class="book_head">{{books.name}}</h1>
+
+        <table class="bk_table">
+            <tr>
+                <th>Authors : </th>
+                <td>{{ books.authors }}</td>
+            </tr>
+            <tr>
+                <th>Genre : </th>
+                <td>{{ books.genre }}</td>
+            </tr>
+            <tr>
+                <th>Published on : </th>
+                <td>{{ books.publi_date }}</td>
+            </tr>
+            <tr>
+            {% if books.n_read != 0 %}
+                <th>Read by : </th>
+                <td>{{ books.n_read }} users</td>
+            {% endif %}
+            </tr>
+
+            <div class="extra">
+                <a href="#description">
+                    <p id="desc_b">Description</p>
+                </a>
+    
+                <a href="#comments">
+                    <p id="rev_b">Reviews</p>
+                </a>
+            </div>
+        </table>
+
+       <div class="book_ord">
+        {% if book.available != 0 %}
+            {% if stat == '' %}
+                <form action="." method="post">
+                    <button class="button" type="submit">RENT</button>
+                </form>
+                <h3 class="avail_num">{{books.available}} available</h3>
+            {% else %}
+                <p id="status">{{stat}}</p>
+            {% endif %}
+
+        {% else %}
+            <h3 class="no_bks" style="color: orange;">currently unavalable</h3>
+            <!-- <p>will be available soon</p> -->
+        {% endif %}
+
+        <a href="/book/{{pk}}">
+            <p id="ref_b">Refresh</p>
+        </a>
+
+    </div>
     </div>
 
 </div>
-<div class="description">
+<div class="description" id="description">
     <h2>Description</h2>
     <p>{{books.description}}</p>
 </div>
-<div class="comments">
+<div class="comments" id="comments">
         <h2 style="text-align: center;">Reviews</h2>
         {% if count == 0 %}
         <h3 style="text-align: center;">No Reviews Yet</h3>

@@ -1,4 +1,49 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    
+    <style>
+        .main_name {
+            /* background-color: rgb(120, 128, 15); */
+            width: 40%;
+            text-align: left;
+            margin-top: 15%;
+            float: right;
+            
+        }
+
+        .main_head {
+            font-size: 60px;
+            /* font-family: 'Brush Script MT', cursive; */
+            color: bisque;
+            margin-top: 0px;
+            /* top: 0px; */
+            margin-bottom: 0px;
+            /* bottom: 0px; */
+
+            /* background-color: tomato; */
+        }
+
+        body {
+            background-image: url("{% static 'images/home.jpg' %}");
+            height: 100%;
+            background-size: cover; 
+        }
+
+        .home_top {
+            background-color: transparent;
+            height: 100px;
+            top: 10px;
+        }
+    </style>
+{% endblock %} 
+
+
 {% block content %}
-<h1>back ground will come here <h1>{{request.user.username}}</h1></h1>
+    <div class="main_name">
+        <p class="main_head">Welcome to</p>
+        <p class="main_head">Get Your Book</p>
+    </div>
+    
 {% endblock %}
