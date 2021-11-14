@@ -4,11 +4,13 @@
 <link rel="stylesheet" href="{% static 'css/book.css' %}">
 {% endblock %}
 {% block content %}
-<div class= "book">
-    <div class= "image">
-        <img src="{{books.cover.url}}">
+<div calss= conatiner>
+    <div class="book_cover">
+        <img src={{books.cover.url}} alt="book cover" width=100%>
     </div>
-    <div class= "book_info">
+
+    <div class="book_info">
+
         <h1 class="book_head">{{books.name}}</h1>
 
         <table class="bk_table">
@@ -25,25 +27,25 @@
                 <td>{{ books.publi_date }}</td>
             </tr>
             <tr>
-            {% if books.n_read != 0 %}
                 <th>Read by : </th>
                 <td>{{ books.n_read }} users</td>
-            {% endif %}
             </tr>
-
-            <div class="extra">
-                <a href="#description">
-                    <p id="desc_b">Description</p>
-                </a>
-    
-                <a href="#comments">
-                    <p id="rev_b">Reviews</p>
-                </a>
-            </div>
         </table>
 
-       <div class="book_ord">
-        {% if book.available != 0 %}
+        <div class="extra">
+            <a href="#description">
+                <p id="desc_b">Description</p>
+            </a>
+
+            <a href="#comments">
+                <p id="rev_b">Reviews</p>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="book_ord">
+        {% if books.available != 0 %}
             {% if stat == '' %}
                 <form action="." method="post">
                     <button class="button" type="submit">RENT</button>
@@ -58,43 +60,43 @@
             <!-- <p>will be available soon</p> -->
         {% endif %}
 
-        <a href="/book/{{pk}}">
+        <a href="/book/{{book_id}}">
             <p id="ref_b">Refresh</p>
         </a>
 
     </div>
-    </div>
 
-</div>
-<div class="description" id="description">
-    <h2>Description</h2>
-    <p>{{books.description}}</p>
-</div>
-<div class="comments" id="comments">
-        <h2 style="text-align: center;">Reviews</h2>
-        {% if count == 0 %}
-        <h3 style="text-align: center;">No Reviews Yet</h3>
-    {% else %}
-    <div class="row">
-        {% for cmt in comments %}
-        <div class="card">
-            <b>{{cmt.user.name}}:</b>
-            <p>{{cmt.comment}}</p>
+
+
+    <div class="description" id="description">
+        <h2>Description</h2>
+        <p>{{books.description}}</p>
+    </div>
+    <div class="comments" id="comments">
+            <h2 style="text-align: center;">Reviews</h2>
+            {% if count == 0 %}
+            <h3 style="text-align: center;">No Reviews Yet</h3>
+        {% else %}
+        <div class="row">
+            {% for cmt in comments %}
+            <div class="card">
+                <b>{{cmt.user.name}}:</b>
+                <p>{{cmt.comment}}</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        {% endif %}
+        <div class="add_comment">
+            <br>
+            <h3 style="text-align: center;">give your Reviews</h3>
+            <form method = "post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="post">
+            </form>
+
+        </div>
+
     </div>
-    {% endif %}
-<div class="add_comment">
-    <br>
-    <h3 style="text-align: center;">give your Reviews</h3>
-    <form method = "post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="post">
-    </form>
-
 </div>
-
-</div>
-
 {% endblock %}
