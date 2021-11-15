@@ -121,7 +121,7 @@
         <div class="container-fluid">
             {% for book in ls %}
                 <div class = "card">
-                    <a href="/book/{{ book.book_id }}">
+                    <a href="/book/{{ book.book_id }}" style="text-decoration: none;">
                         <div class = "image">
                             <img src="{{book.cover.url}}"> 
                         </div>
@@ -133,9 +133,9 @@
     </div>
 
     <div class="side_b">
-        <a href="/books/">
+        <a href="/books/" style="text-decoration: none;">
             <div class="block_v">
-                <h2>Search Books</h2>
+                <h2>Find More Books</h2>
             </div>
         </a>
 

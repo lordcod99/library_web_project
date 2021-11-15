@@ -6,6 +6,9 @@ from orders.models import order
 from profiles.models import user_profile
 from .forms import review_form, search_form
 from collections import deque
+from datetime import datetime
+from pytz import timezone
+
 # Create your views here.
 def home_veiw(request, *args, **kwrgs):
     return render(request, 'home.html')
@@ -86,7 +89,7 @@ def book_veiw(request, book_id,*args, **kwrgs):
         form = review_form()
         print("ffhbdjfb ffhbdjhf ******")
     elif request.method == "POST":
-        odr = order.objects.create(book = books, user = user)
+        odr = order.objects.create(book = books, user = user, taken = datetime.now(timezone('Asia/Kolkata')))
         ord_id = odr.order_id
         stat = odr.r_status
         print("***************8")
