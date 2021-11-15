@@ -27,8 +27,10 @@
                 <td>{{ books.publi_date }}</td>
             </tr>
             <tr>
+                {% if books.n_read != 0%}
                 <th>Read by : </th>
                 <td>{{ books.n_read }} users</td>
+                {% endif  %}
             </tr>
         </table>
 
@@ -48,11 +50,15 @@
         {% if books.available != 0 %}
             {% if stat == '' %}
                 <form action="." method="post">
+                    {% csrf_token %}
                     <button class="button" type="submit">RENT</button>
                 </form>
                 <h3 class="avail_num">{{books.available}} available</h3>
             {% else %}
                 <p id="status">{{stat}}</p>
+                {% if ord_id != 0 %}
+                    <p id="order_id">Your Order Id is {{ ord_id }}</p>
+                {% endif %}
             {% endif %}
 
         {% else %}

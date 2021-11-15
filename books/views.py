@@ -73,6 +73,10 @@ def book_veiw(request, book_id,*args, **kwrgs):
     user = user_profile.objects.filter(name = request.user.username).first()
     comments =comment.objects.filter(book = book_id)
     form = review_form(request.POST or None)
+    
+    stat = ''
+    ord_id = 0
+
     if form.is_valid():
         obj = form.save(commit=False)
         # user = user_profile.objects.filter(name = request.user.username).first()
@@ -80,20 +84,22 @@ def book_veiw(request, book_id,*args, **kwrgs):
         obj.book=books
         obj.save()
         form = review_form()
-
-    stat = ''
-    if request.method == "POST":
+        print("ffhbdjfb ffhbdjhf ******")
+    elif request.method == "POST":
         odr = order.objects.create(book = books, user = user)
+        ord_id = odr.order_id
         stat = odr.r_status
+        print("***************8")
 
     qs = order.objects.all().filter(book = books).filter(user = user).exclude(r_status = "returned")
     if len(qs):
         qs = qs.first()
+        ord_id = qs.order_id
         stat = qs.r_status
     
 
     count = len(comments)
-    context={'books': books, "comments":comments, "count":count, "form":form, "stat":stat}
+    context={'books': books, "comments":comments, "count":count, "form":form, "stat":stat,"ord_id":ord_id,"book_id":book_id}
     return render(request, 'books/book.html', context)
 
 def book_main_view(request, *args, **kwrgs):

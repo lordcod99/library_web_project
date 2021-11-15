@@ -205,6 +205,12 @@ b {
       padding-right: 10px;
       
   } */
+  #order_id {
+    /* background-color: blue; */
+    float: left;
+    margin-left: 2%;
+    margin-top: 3%;
+}
   .description{
     text-align: center;
     background-color: rgb(235, 238, 238);
