@@ -87,19 +87,21 @@ def book_veiw(request, book_id,*args, **kwrgs):
         obj.book=books
         obj.save()
         form = review_form()
-        print("ffhbdjfb ffhbdjhf ******")
     elif request.method == "POST":
         odr = order.objects.create(book = books, user = user, taken = datetime.now(timezone('Asia/Kolkata')))
         ord_id = odr.order_id
         stat = odr.r_status
-        print("***************8")
 
     qs = order.objects.all().filter(book = books).filter(user = user).exclude(r_status = "returned")
-    if len(qs):
+    if  len(qs):
         qs = qs.first()
         ord_id = qs.order_id
         stat = qs.r_status
-    
+        cur = datetime.now(timezone('Asia/Kolkata'))
+        if ((cur-(qs.taken)).days > 10) and (stat == "placed"):
+            stat = ""
+            ord_id = 0
+            qs.delete()
 
     count = len(comments)
     context={'books': books, "comments":comments, "count":count, "form":form, "stat":stat,"ord_id":ord_id,"book_id":book_id}
@@ -109,4 +111,5 @@ def book_main_view(request, *args, **kwrgs):
     books= book.objects.all().order_by('-n_read')[:10]
     context={'ls': books}
     return render(request, 'books/book_main.html', context)
+
 
